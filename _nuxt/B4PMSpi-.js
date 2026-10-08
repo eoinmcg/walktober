@@ -1,0 +1,1 @@
+function e(e){return URL.createObjectURL(e)}function t(e){URL.revokeObjectURL(e)}export{t as n,e as t};
