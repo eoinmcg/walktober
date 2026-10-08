@@ -8,7 +8,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "deploy": "gh-pages -d .output/public"
+    "deploy": "nuxt generate && node -e \"fs.copyFileSync('.output/public/index.html', '.output/public/404.html')\" && gh-pages -d .output/public"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.0",
