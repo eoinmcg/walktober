@@ -3,21 +3,24 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "postinstall": "node scripts/copy-ort.mjs && nuxt prepare",
+    "postinstall": "nuxt prepare",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "deploy": "gh-pages -d .output/public"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.0",
-    "onnxruntime-web": "^1.21.1",
     "@nuxt/icon": "^2.5.1",
     "@picocss/pico": "^2.1.1",
     "@vite-pwa/nuxt": "^1.1.1",
     "nuxt": "^4.5.2",
+    "onnxruntime-web": "^1.21.1",
     "vue": "^3.5.43",
     "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
