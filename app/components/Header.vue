@@ -72,15 +72,16 @@
   grid-row: 1 / span 2;
   width: 3.4rem;
   height: 3.4rem;
-  color: var(--stamp);
+  color: darkgreen;
   rotate: -8deg;
   opacity: 0.92;
-  transition: rotate 0.3s cubic-bezier(0.3, 1.5, 0.5, 1);
+  transition: all 0.3s cubic-bezier(0.3, 1.5, 0.5, 1);
 }
 
 .site-header .brand a:hover .logo,
 .site-header .brand a:focus-visible .logo {
   rotate: 4deg;
+  color: var(--stamp);
 }
 
 .site-header .wordmark {

@@ -28,12 +28,15 @@ const { message } = useLeafBurst()
 
 .leaf-text {
   margin: 0;
-  padding: 0 1rem;
+  padding: .5rem 1rem;
+  background: #fff;
   text-align: center;
   font-size: clamp(2rem, 6vw, 4rem);
   font-weight: 700;
-  color: var(--color-dark);
-  text-shadow: 0 2px 12px rgb(255, 255, 255, 0.5);
+  color: var(--color-accent);
+  box-shadow: 0 2px 12px rgb(255, 255, 255, 0.5);
+  border-radius: 3px;
+  transform: translateY(var(1px)) rotate(var(-3deg));
 }
 
 .leaf-fade-enter-active {

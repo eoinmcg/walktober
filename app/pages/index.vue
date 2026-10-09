@@ -69,13 +69,44 @@ onUnmounted(() => {
 <template>
   <main class="container">
 
-    <p v-if="status === 'loading' && cache?.length !== 5" class="note">
-      Loading model… {{ progress }}% <span class="hint">(first load downloads weights, then it's cached)</span>
+    <p v-if="status === 'loading' && cache?.length !== 5" class="note hidden">
+      Loading models... {{ progress }}% <span class="hint">(first load downloads weights, then it's cached)</span>
     </p>
     <p v-else-if="status === 'error'" class="note err">Error: {{ error }}</p>
     <p v-else class="note hidden">Model ready <b>{{ device }}</b></p>
 
-    <Scrapbook :items="images" :handleDelete="deleteItem" />
+
+    <span v-if="status === 'loading' && cache?.length !== 5" class="note">
+      <p>
+        Downloading models... {{ progress }}%
+        <br />
+        <span class="hint">
+          (this only happens the first time you use Walktober)
+        </span>
+      </p>
+    </span>
+
+    <span v-else-if="status === 'error'" class="note err">
+      <p>
+      Error: {{ error }}
+      </p>
+    </span>
+
+    <span v-else-if="images.length > 0">
+      <Scrapbook :items="images" :handleDelete="deleteItem" />
+    </span>
+
+    <span v-else-if="images.length === 0" class="note">
+      <p>
+        Walktober is a small reason to go outside. Photograph what you notice,
+        complete quests, and fill your scrapbook with the season. Then put your phone away.
+      </p>
+      <p>
+        <NuxtLink to="/photo" type="button">
+          Get Started
+        </NuxtLink>
+      </p>
+    </span>
 
   </main>
 </template>
@@ -192,48 +223,12 @@ li {
   font-variant-numeric: tabular-nums;
 }
 
-.scrapbook .item {
-  display: flex;
-  position: relative;
-  transition: all .2s linear;
-}
+.note {
+  --paper: #fbf9f3;
+  font-size: 120%;
+  background: var(--paper);
 
-.scrapbook .item:hover {
-  transform: scale(1.1);
-}
-
-.scrapbook .item a {
-  text-decoration: none;
-}
-
-.scrapbook .item button.delete {
-  position: absolute;
-  top: .5rem;
-  right: .5rem;
-  background: transparent;
-  color: #c20;
-  box-shadow: none;
-  display: inline-block;
-}
-
-.scrapbook .item button.delete:hover {
-  position: absolute;
-  top: .5rem;
-  left: .5rem;
-  background: #fff;
-  color: #c20;
-  box-shadow: var(--shadow-lg);
-}
-
-.scrapbook .item img {
-  max-width: 200px;
 }
 
 
-.scrapbook .item .label {
-  width: auto;
-  background: var(--color-dark);
-  padding: .5rem 1rem;
-  color: #fff;
-}
 </style>

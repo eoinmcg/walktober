@@ -100,7 +100,7 @@ const percentage = (n: number) => `${(n * 100).toFixed(1)}%`
         </h1>
       </span>
       <img :src="item.url" />
- Walktober is a small reason to go outside. Photograph what you notice, complete quests, and fill your scrapbook with the season. Then put your phone away.   </span>
+    </span>
 
     <section v-if="results.length">
       <p class="note">Scored {{ results.length }} quests in {{ elapsedMs }} ms
