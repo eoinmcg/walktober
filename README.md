@@ -7,6 +7,8 @@
 ## About
 Walktober is a small reason to go outside. Photograph what you notice, complete quests, and fill your scrapbook with the season. Then put your phone away.
 
+This is a submission for the [Hacktoberfest Open-Source AI Challenge Week 1: Touch Grass](https://dev.to/challenges/hacktoberfest-week1-2026-10-05)
+
 ## Privacy
 Your photos never leave your device. Cutout and quest checking run locally, and nothing is tracked or sent to a server.
 
