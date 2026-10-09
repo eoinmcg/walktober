@@ -1,1 +1,0 @@
-import{L as e,p as t}from"./LEYcg3RU.js";import{t as n}from"#entry";var r={};function i(n,r){return e(),t(`h1`,null,`ABOUT`)}var a=n(r,[[`render`,i]]);export{a as default};

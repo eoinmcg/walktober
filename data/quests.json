@@ -40,7 +40,7 @@
     },
     {
       "id": "mushroom",
-      "title": "Forest Mushroom",
+      "title": "Mushroom",
       "rarity": "rare",
       "prompts": [
         "a macro photo of a wild mushroom cap growing on damp forest soil",
@@ -103,12 +103,12 @@
       ]
     },
     {
-      "id": "yellow-birch-leaf",
-      "title": "Golden Birch Leaf",
+      "id": "golden-leaf",
+      "title": "Golden Leaf",
       "rarity": "common",
       "prompts": [
-        "a bright golden yellow birch leaf outdoors in autumn",
-        "a close-up of a serrated yellow leaf on a branch",
+        "a bright golden yellow leaf outdoors in autumn",
+        "a close-up of a yellow leaf on a branch",
         "golden fall foliage resting on dark soil"
       ],
       "confusers": [

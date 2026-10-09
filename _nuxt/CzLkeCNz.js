@@ -1,0 +1,1 @@
+function e(e,t=`en-US`,n){return new Intl.DateTimeFormat(t,{dateStyle:`medium`,...n}).format(new Date(e))}export{e as t};
