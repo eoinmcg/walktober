@@ -1,6 +1,9 @@
 {
   "name": "walktober",
   "type": "module",
+  "version": "0.0.6",
+  "license": "MIT",
+  "author": "Eoin McGrath <eoin.mcg@gmail.com>",
   "private": true,
   "scripts": {
     "postinstall": "nuxt prepare",

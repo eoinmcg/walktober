@@ -10,3 +10,9 @@ Walktober is a small reason to go outside. Photograph what you notice, complete 
 ## Privacy
 Your photos never leave your device. Cutout and quest checking run locally, and nothing is tracked or sent to a server.
 
+## Tech used
+- Nuxt
+- Pico CSS
+- u2netp for removing background from images
+- Xenova/clip-vit-base-patch32 for matching images with quests
+
