@@ -42,6 +42,8 @@ watch(isOpen, (newValue) => {
         :duration="toast.duration" @close="closeToast(toast.id)" />
     </TransitionGroup>
 
+    <LeafBurstOverlay />
+
     <Teleport to="body">
       <dialog ref="dialogRef" class="confirm-modal">
         <article>
@@ -59,6 +61,8 @@ watch(isOpen, (newValue) => {
         </article>
       </dialog>
     </Teleport>
+
+    <AddPhoto />
 
     <Footer />
   </div>

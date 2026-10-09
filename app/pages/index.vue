@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const { status, progress, results, elapsedMs, device, error, init, classify } = useVerifier()
+const { getCompletedQuests, removeQuest } = useQuestProgress()
 const { toast } = useToast()
+const cache = ref([])
+
+const completedQuests = ref(0)
+const totalQuests = ref(0)
 
 const deleteItem = (async (id) => {
   if (!confirm('Are you sure?')) {
@@ -8,6 +13,13 @@ const deleteItem = (async (id) => {
   }
 
   const image = images.value.find(image => image.id === id)
+  const completedQuests = getCompletedQuests()
+  for (let n in completedQuests) {
+    let quest = completedQuests[n]
+    if (quest && quest.imageId === id) {
+      removeQuest(n)
+    }
+  }
 
   if (!image) { return }
 
@@ -27,6 +39,15 @@ const images = ref<
 onMounted(async () => {
   // loads (and hence caches) verification models
   init()
+
+  completedQuests.value = getCompletedQuests()
+  const data = await $fetch('/data/quests.json')
+  totalQuests.value = data.quests.length
+
+
+  // we should have 5 items in transformers cache
+  // these handle the classification
+  cache.value = await getTransformersCache()
 
   const records = await getAllImages()
   await ensurePersistence()
@@ -48,29 +69,13 @@ onUnmounted(() => {
 <template>
   <main class="container">
 
-    <p>Quests: </p>
-
-    <p v-if="status === 'loading'" class="note">
+    <p v-if="status === 'loading' && cache?.length !== 5" class="note">
       Loading model… {{ progress }}% <span class="hint">(first load downloads weights, then it's cached)</span>
     </p>
     <p v-else-if="status === 'error'" class="note err">Error: {{ error }}</p>
-    <p v-else class="note">Model ready on <b>{{ device }}</b></p>
+    <p v-else class="note hidden">Model ready <b>{{ device }}</b></p>
 
-
-    <NuxtLink type="button" to="/photo">
-      Add photo
-    </NuxtLink>
-
-    <section class="scrapbook">
-      <div class="card item" v-for="i in images">
-        <NuxtLink :to="`/item/${i.id}`">
-          <img :src="i.url" />
-          <span class="date">{{ formatDate(i.createdAt) }}</span>
-          <button class="delete" @click.stop.prevent="deleteItem(i.id)">Delete</button>
-          View
-        </NuxtLink>
-      </div>
-    </section>
+    <Scrapbook :items="images" :handleDelete="deleteItem" />
 
   </main>
 </template>
@@ -187,19 +192,48 @@ li {
   font-variant-numeric: tabular-nums;
 }
 
-.scrapbook .card {
-  display: grid;
+.scrapbook .item {
+  display: flex;
   position: relative;
+  transition: all .2s linear;
 }
 
+.scrapbook .item:hover {
+  transform: scale(1.1);
+}
 
-.scrapbook .card button.delete {
+.scrapbook .item a {
+  text-decoration: none;
+}
+
+.scrapbook .item button.delete {
   position: absolute;
   top: .5rem;
   right: .5rem;
+  background: transparent;
+  color: #c20;
+  box-shadow: none;
+  display: inline-block;
+}
+
+.scrapbook .item button.delete:hover {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  background: #fff;
+  color: #c20;
+  box-shadow: var(--shadow-lg);
 }
 
 .scrapbook .item img {
   max-width: 200px;
+}
+
+
+.scrapbook .item .label {
+  width: auto;
+  background: var(--color-dark);
+  padding: .5rem 1rem;
+  color: #fff;
 }
 </style>

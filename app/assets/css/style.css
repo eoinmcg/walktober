@@ -18,6 +18,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Caveat";
+  src: url("/fonts/caveat.ttf") format("truetype");
+  font-weight: 400 700; /* variable font; use 600 if you download a single static weight */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Special Elite";
+  src: url("/fonts/special-elite.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* -------------------------------------------------------
    Theme Variables (Autumn Palette)
    ------------------------------------------------------- */
@@ -28,6 +44,8 @@
   /* Typography */
   --font-sans: "Fraunces", "Noto Sans", system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --font-type: "Special Elite", "Courier New", monospace;
 
   /* Pico Primary Color Overrides (Warm Burnt Terracotta) */
   --pico-primary: #b85b35;
@@ -165,6 +183,7 @@ main.container {
   padding: 1rem;
   margin: 2rem auto;
   min-height: 80vh;
+  background: transparent;
 }
 
 .button-group,
@@ -286,6 +305,8 @@ button.cta:hover {
 /* -------------------------------------------------------
    Utilities & Alerts
    ------------------------------------------------------- */
+.hidden { display: none;}
+
 .error {
   background-color: #a3382b;
   color: #ffffff;

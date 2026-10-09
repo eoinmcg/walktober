@@ -3,6 +3,7 @@
 const { status, progress, results, elapsedMs, device, error, init, classify } = useVerifier()
 const { isQuestCompleted, completeQuest } = useQuestProgress()
 const { toast } = useToast()
+const { burst } = useLeafBurst()
 
 
 const route = useRoute()
@@ -14,6 +15,8 @@ const label = ref('')
 const item = ref()
 const processedResults = ref(false)
 const shouldLabel = ref(ACTION === 'label')
+const quests = ref([])
+const labelInput = ref()
 
 onMounted(async () => {
   await init()
@@ -21,6 +24,14 @@ onMounted(async () => {
   label.value = item.value.label
   if (!item.value) { }
   item.value.url = createImageUrl(item.value.blob)
+  const data = await $fetch('/data/quests.json')
+  quests.value = data.value
+  await nextTick()
+  try {
+    labelInput.value?.focus()
+  } catch {
+  }
+
 
 })
 
@@ -42,8 +53,11 @@ const firstResult = computed(() =>
 
 watch(firstResult, async (newResults) => {
   let prob = Math.floor(newResults.prob * 100)
+  const completed = isQuestCompleted(newResults.id)
+  // if (prob > 50 && !completed) {
   if (prob > 50) {
     completeQuest(newResults.id, ID)
+    burst({ message: 'Quest Complete', duration: 3 })
   }
 })
 
@@ -64,18 +78,18 @@ const percentage = (n: number) => `${(n * 100).toFixed(1)}%`
 <template>
   <main class="container">
 
-    <div v-if="status === 'loading'" class="note">
+    <div v-if="status === 'loading'" class="note hidden">
       Loading model… {{ progress }}% <span class="hint">(first load downloads weights, then it's cached)</span>
     </div>
 
     <p v-else-if="status === 'error'" class="note err">Error: {{ error }}</p>
-    <p v-else class="note">Model ready on <b>{{ device }} [{{ status }}]</b></p>
+    <p v-else class="note hidden">Model ready on <b>{{ device }} [{{ status }}]</b></p>
 
     <span v-if="item">
       <span v-if="!item.label || shouldLabel">
         <form @submit.prevent="updateLabel">
           <fieldset role="group">
-            <input type="text" v-model="label" placeholder="Enter a label for this image" required />
+            <input type="text" v-model="label" ref="labelInput" placeholder="Enter a label for this image" required />
             <input type="submit" value="Save" />
           </fieldset>
         </form>
@@ -86,8 +100,7 @@ const percentage = (n: number) => `${(n * 100).toFixed(1)}%`
         </h1>
       </span>
       <img :src="item.url" />
-      <span>{{ formatDate(item.createdAt) }}</span>
-    </span>
+ Walktober is a small reason to go outside. Photograph what you notice, complete quests, and fill your scrapbook with the season. Then put your phone away.   </span>
 
     <section v-if="results.length">
       <p class="note">Scored {{ results.length }} quests in {{ elapsedMs }} ms

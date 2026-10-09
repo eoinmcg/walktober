@@ -1,0 +1,170 @@
+{
+  "negatives": [
+    "a photo of plain indoor flooring",
+    "a blurry, out-of-focus photo",
+    "a photo of a person or selfie indoors",
+    "a photo of a computer screen or TV"
+  ],
+  "quests": [
+    {
+      "id": "chestnut",
+      "title": "Spiky Chestnut",
+      "rarity": "common",
+      "prompts": [
+        "a close-up macro photo of a shiny brown horse chestnut",
+        "a horse chestnut nestled inside its spiky green husk on the ground",
+        "a fallen brown conker nut on autumn leaves"
+      ],
+      "confusers": [
+        "a photo of a smooth brown acorn",
+        "a photo of a round grey pebble",
+        "a photo of a rough pine cone",
+        "a photo of a round mushroom cap"
+      ]
+    },
+    {
+      "id": "red-leaf",
+      "title": "Crimson Leaf",
+      "rarity": "common",
+      "prompts": [
+        "a macro photograph of a vibrant red autumn leaf showing detailed veins",
+        "a bright crimson maple leaf lying on the ground",
+        "a close-up of a deep red foliage leaf outdoors"
+      ],
+      "confusers": [
+        "a photo of a flat green leaf",
+        "a photo of a yellow fall leaf",
+        "a photo of a bright red flower petal",
+        "a photo of red brick or pavement"
+      ]
+    },
+    {
+      "id": "mushroom",
+      "title": "Mushroom",
+      "rarity": "rare",
+      "prompts": [
+        "a macro photo of a wild mushroom cap growing on damp forest soil",
+        "a close-up of a small toadstool stalk and cap in the woods",
+        "a fungus fruiting body growing out of moss or dead wood"
+      ],
+      "confusers": [
+        "a photo of a rough tree stump top",
+        "a photo of a smooth rounded pebble",
+        "a photo of green forest moss without a mushroom",
+        "a photo of a spiky chestnut husk"
+      ]
+    },
+    {
+      "id": "frosty-spiderweb",
+      "title": "Frozen Web",
+      "rarity": "legendary",
+      "prompts": [
+        "a macro photograph of intricate spiderweb threads covered in ice crystals and frost",
+        "a spiderweb sparkling with frozen morning dew or ice",
+        "a delicate web structure glistening with a coat of winter frost"
+      ],
+      "confusers": [
+        "a photo of a plain dry spiderweb without frost",
+        "a photo of a wire mesh fence or grid",
+        "a photo of ice or condensation on a frosty window glass",
+        "a photo of white mold or fungal threads"
+      ]
+    },
+    {
+      "id": "acorn",
+      "title": "Oak Acorn",
+      "rarity": "common",
+      "prompts": [
+        "a close-up photo of an oak acorn with its bumpy cap",
+        "a brown acorn sitting amongst fallen oak leaves",
+        "a macro shot of a nut from an oak tree on the grass"
+      ],
+      "confusers": [
+        "a photo of a horse chestnut",
+        "a photo of a smooth button",
+        "a photo of a small round pebble",
+        "a photo of a pine nut"
+      ]
+    },
+    {
+      "id": "pine-cone",
+      "title": "Pine Cone",
+      "rarity": "common",
+      "prompts": [
+        "a photo of a woody pine cone on the forest floor",
+        "a close-up of open pine cone scales showing texture",
+        "a fallen pinecone surrounded by pine needles"
+      ],
+      "confusers": [
+        "a photo of a corn cob",
+        "a photo of a spiky chestnut husk",
+        "a photo of a braided rope",
+        "a photo of tree bark"
+      ]
+    },
+    {
+      "id": "golden-leaf",
+      "title": "Golden Leaf",
+      "rarity": "common",
+      "prompts": [
+        "a bright golden yellow leaf outdoors in autumn",
+        "a close-up of a yellow leaf on a branch",
+        "golden fall foliage resting on dark soil"
+      ],
+      "confusers": [
+        "a photo of a red autumn leaf",
+        "a photo of green summer foliage",
+        "a photo of yellow plastic or paper",
+        "a photo of a plain yellow flower"
+      ]
+    },
+    {
+      "id": "mossy-bark",
+      "title": "Mossy Tree Bark",
+      "rarity": "common",
+      "prompts": [
+        "a close-up photo of green moss growing on rough tree bark",
+        "textured woodland tree trunk covered in velvety green moss",
+        "macro shot of forest bark and green moss outdoors"
+      ],
+      "confusers": [
+        "a photo of a plain tree trunk without moss",
+        "a photo of flat green grass on the ground",
+        "a photo of a green leaf",
+        "a photo of green carpet"
+      ]
+    },
+    {
+      "id": "feather",
+      "title": "Wild Bird Feather",
+      "rarity": "rare",
+      "prompts": [
+        "a detailed close-up of a wild bird feather lying on the ground",
+        "a single feather resting on dirt or moss outdoors",
+        "an avian feather showing fine barbules on outdoor soil"
+      ],
+      "confusers": [
+        "a photo of a long dry blade of grass",
+        "a photo of a piece of white plastic trash",
+        "a photo of a fern frond",
+        "a photo of a twig"
+      ]
+    },
+    {
+      "id": "fairy-ring",
+      "title": "Fairy Ring",
+      "rarity": "legendary",
+      "prompts": [
+        "a wide shot of a natural ring of wild mushrooms growing in the grass",
+        "a circle of toadstools sprouting in a lawn or forest clearing",
+        "a magical ring formation of multiple mushrooms on the ground"
+      ],
+      "confusers": [
+        "a photo of a single scattered mushroom",
+        "a photo of a fairy circle made of stones",
+        "a photo of a circular patch of dead grass",
+        "a photo of a horseshoe pattern on dirt"
+      ]
+    }
+  ]
+}

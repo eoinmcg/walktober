@@ -9,12 +9,6 @@
 </template>
 
 <style>
-body {
-
-  background: url('forest-sky.avif');
-  background-size: cover;
-}
-
 main {
   margin: 2rem auto;
   width: 600px;
