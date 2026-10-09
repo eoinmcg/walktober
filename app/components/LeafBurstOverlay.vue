@@ -36,7 +36,7 @@ const { message } = useLeafBurst()
   color: var(--color-accent);
   box-shadow: 0 2px 12px rgb(255, 255, 255, 0.5);
   border-radius: 3px;
-  transform: translateY(1px) rotate(var(-3deg));
+  transform: translateY(1px) rotate(-3deg);
 }
 
 .leaf-fade-enter-active {
