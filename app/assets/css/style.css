@@ -126,6 +126,29 @@ html, body {
   min-height: 100vh;
   background-color: var(--color-bg);
   overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 70vw;
+  height: 70vh;
+
+  background-image: url('/tracks.png');
+  background-size: contain;
+  background-position: left -120px bottom 0;
+
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.app-shell {
+position: relative;
+  z-index: 1;
 }
 
 p, li {
