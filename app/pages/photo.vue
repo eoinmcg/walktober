@@ -6,29 +6,53 @@ const params = ref<MaskParams>({ cutoff: 0.5, soft: 0.3, feather: 0 })
 const srcUrl = ref('')
 
 async function onFile(e: Event) {
-  const f = (e.target as HTMLInputElement).files?.[0]
+  const input = e.target as HTMLInputElement
+  const f = input.files?.[0]
   if (!f) return
+
   if (srcUrl.value) URL.revokeObjectURL(srcUrl.value)
   srcUrl.value = URL.createObjectURL(f)
-  await run(f)
+
+  try {
+    await run(f)
+  } finally {
+    // Allows selecting or taking the same image again.
+    input.value = ''
+  }
 }
-onBeforeUnmount(() => srcUrl.value && URL.revokeObjectURL(srcUrl.value))
+
+onBeforeUnmount(() => {
+  if (srcUrl.value) URL.revokeObjectURL(srcUrl.value)
+})
 </script>
 
 <template>
   <main>
-    <h1>🍃 Leaf cutout</h1>
-    <p>{{ status }}</p>
-    <input type="file" accept="image/*" :disabled="!ready || busy" @change="onFile" />
+    <p v-if="ready">READY</p>
+    <p v-else>PREPARING</p>
+
+    <div class="actions">
+      <!-- Choose from gallery/files -->
+      <label>
+        Choose image
+        <input type="file" accept="image/*" :disabled="!ready || busy" @change="onFile" />
+      </label>
+
+      <!-- Open camera on supported mobile devices -->
+      <label>
+        Take photo
+        <input type="file" accept="image/*" capture="environment" :disabled="!ready || busy" @change="onFile" />
+      </label>
+    </div>
+
     <div class="cols">
-      <img v-if="srcUrl" :src="srcUrl" alt="source" v-show="busy" />
+      <img v-if="srcUrl" :src="srcUrl" alt="Source" v-show="busy" />
       <span v-show="result">
         <ResultCanvas :source="result" :params="params" />
       </span>
     </div>
   </main>
 </template>
-
 <style>
 body {
   font: 16px system-ui;

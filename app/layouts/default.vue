@@ -32,13 +32,8 @@ watch(isOpen, (newValue) => {
 
 <template>
   <div class="app-shell">
-    <header>
-      <h1>
-        <NuxtLink to="/">
-          🍂 Walktober <small>Track and leaf</small>
-        </NuxtLink>
-      </h1>
-    </header>
+
+    <Header />
 
     <slot />
 
@@ -65,7 +60,9 @@ watch(isOpen, (newValue) => {
       </dialog>
     </Teleport>
 
+    <Footer />
   </div>
+
 </template>
 
 <style>

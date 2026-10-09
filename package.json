@@ -5,10 +5,10 @@
   "scripts": {
     "postinstall": "nuxt prepare",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "deploy": "nuxt generate && node -e \"fs.copyFileSync('.output/public/index.html', '.output/public/404.html')\" && gh-pages -d .output/public"
+    "deploy": "nuxt generate && node -e \"fs.copyFileSync('.output/public/index.html', '.output/public/404.html')\" && gh-pages -d .output/public --dotfiles"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.0",

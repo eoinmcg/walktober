@@ -17,7 +17,7 @@ import { AutoTokenizer, CLIPTextModelWithProjection } from '@huggingface/transfo
 // MUST match the vision model used at runtime, or the vectors live in
 // different spaces and similarities are meaningless.
 const MODEL_ID = 'Xenova/clip-vit-base-patch32'
-const QUESTS_PATH = 'data/quests.json'
+const QUESTS_PATH = 'public/data/quests.json'
 const OUT_PATH = 'public/embeddings/text-embeddings.json'
 const PRECISION = 5 // decimals kept per float; keeps the JSON small
 

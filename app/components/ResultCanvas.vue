@@ -28,7 +28,7 @@ async function draw() {
     renderSticker(cutout, sticker.value)
     sticker.value?.toBlob(async (blob) => {
       let i = await saveImage(blob)
-      console.log(i)
+      await navigateTo(`/item/${i.id}?action=add_label`)
     })
   })
 }

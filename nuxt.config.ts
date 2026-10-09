@@ -12,9 +12,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/icon', '@vite-pwa/nuxt'
   ],
-  // buildModules: [
-  //   '@nuxtjs/pwa',
-  // ],
 
   // Set Security Headers required for SharedArrayBuffer & WASM Multi-threading
   routeRules: {

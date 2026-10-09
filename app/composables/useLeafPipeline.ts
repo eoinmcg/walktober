@@ -12,7 +12,7 @@ export function useLeafPipeline() {
     env.allowLocalModels = true            // off by default in browsers
     env.localModelPath = `${base}models/`
 
-    // Absolute URLs (same dynamic-import gotcha as before)
+    // Absolute URLs
     const ort = new URL(`${base}ort-tf/`, location.origin).href
     env.backends.onnx.wasm.wasmPaths = {
       mjs: `${ort}ort-wasm-simd-threaded.asyncify.mjs`,

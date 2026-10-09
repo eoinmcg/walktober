@@ -1,4 +1,3 @@
-/// <reference lib="webworker" />
 import {
   AutoProcessor,
   CLIPVisionModelWithProjection,
@@ -6,11 +5,12 @@ import {
   env,
 } from '@huggingface/transformers'
 
-env.allowLocalModels = false
+env.allowRemoteModels = true;
+env.useBrowserCache = true;
 
-// Verdict rules: tweak these (or make them per-quest) once you have real photos.
-const MIN_PROB = 0.5 // target must have at least this probability...
-const MIN_MARGIN = 0.2 // ...and beat the runner-up by this much
+// Verdict rules: @todo tweak and test
+const MIN_PROB = 0.5 // target must have at least this probability
+const MIN_MARGIN = 0.2 // and beat the runner-up by this much
 
 type Vec = number[]
 type LabelVec = { label: string; vec: Vec }

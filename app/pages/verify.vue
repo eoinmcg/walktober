@@ -22,7 +22,6 @@ const pct = (n: number) => `${(n * 100).toFixed(1)}%`
 
 <template>
   <main class="container">
-    <h1>🍂 Walktober <small>Track and leaf</small></h1>
 
     <p v-if="status === 'loading'" class="note">
       Loading model… {{ progress }}% <span class="hint">(first load downloads weights, then it's cached)</span>

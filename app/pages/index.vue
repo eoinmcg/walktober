@@ -1,9 +1,10 @@
 <script setup lang="ts">
 const { status, progress, results, elapsedMs, device, error, init, classify } = useVerifier()
+const { toast } = useToast()
 
 const deleteItem = (async (id) => {
-  if (confirm('Are you sure?')) {
-    console.log({ id }, 'delete')
+  if (!confirm('Are you sure?')) {
+    return
   }
 
   const image = images.value.find(image => image.id === id)
@@ -16,6 +17,7 @@ const deleteItem = (async (id) => {
   images.value = images.value.filter(
     image => image.id !== id
   )
+  toast('Image removed')
 })
 
 const images = ref<
@@ -23,9 +25,11 @@ const images = ref<
 >([])
 
 onMounted(async () => {
+  // loads (and hence caches) verification models
   init()
 
   const records = await getAllImages()
+  await ensurePersistence()
 
   images.value = records.map(image => ({
     ...image,
@@ -44,18 +48,29 @@ onUnmounted(() => {
 <template>
   <main class="container">
 
+    <p>Quests: </p>
+
+    <p v-if="status === 'loading'" class="note">
+      Loading model… {{ progress }}% <span class="hint">(first load downloads weights, then it's cached)</span>
+    </p>
+    <p v-else-if="status === 'error'" class="note err">Error: {{ error }}</p>
+    <p v-else class="note">Model ready on <b>{{ device }}</b></p>
+
+
     <NuxtLink type="button" to="/photo">
       Add photo
     </NuxtLink>
 
-    <div class="card" v-for="i in images">
-      <img :src="i.url" />
-      <span class="date">{{ new Date(i.createdAt).toString() }}</span>
-      <b>{{ i.id }}</b>
-      <button @click="deleteItem(i.id)">Delete</button>
-      <NuxtLink :to="`/item/${i.id}`">
-        View</NuxtLink>
-    </div>
+    <section class="scrapbook">
+      <div class="card item" v-for="i in images">
+        <NuxtLink :to="`/item/${i.id}`">
+          <img :src="i.url" />
+          <span class="date">{{ formatDate(i.createdAt) }}</span>
+          <button class="delete" @click.stop.prevent="deleteItem(i.id)">Delete</button>
+          View
+        </NuxtLink>
+      </div>
+    </section>
 
   </main>
 </template>
@@ -170,5 +185,21 @@ li {
 .val {
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+.scrapbook .card {
+  display: grid;
+  position: relative;
+}
+
+
+.scrapbook .card button.delete {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+}
+
+.scrapbook .item img {
+  max-width: 200px;
 }
 </style>
