@@ -1,0 +1,1 @@
+function e(e){return URL.createObjectURL(e)}function t(e){URL.revokeObjectURL(e)}function n(e,t=`en-US`,n){return new Intl.DateTimeFormat(t,{dateStyle:`medium`,...n}).format(new Date(e))}export{e as n,t as r,n as t};
