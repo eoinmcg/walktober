@@ -30,6 +30,7 @@ async function onFile(e: Event) {
 onMounted(async () => {
   await nextTick()
   if (navigator.userActivation && !navigator.userActivation.isActive) return
+  if (!ready) return
   try {
     fileInput.value?.click()
   } catch {
@@ -138,7 +139,7 @@ img {
   min-height: 16rem;
   margin-block: 1rem;
   padding: 2rem;
-  border: 2px dashed color-mix(in srgb, var(--pico-color, #333) 35%, transparent);
+  /* border: 2px dashed color-mix(in srgb, var(--pico-color, #333) 35%, transparent); */
   border-radius: 4px;
 }
 

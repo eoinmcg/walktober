@@ -103,6 +103,10 @@ onUnmounted(() => {
         complete quests, and fill your scrapbook with the season. Then put your phone away.
       </p>
       <p>
+        Take a pic of something notable on your autumnal ramblings. It is then converted into a sticker and added into
+        your scrabook.
+      </p>
+      <p>
         <NuxtLink to="/photo" type="button">
           Get Started
         </NuxtLink>
