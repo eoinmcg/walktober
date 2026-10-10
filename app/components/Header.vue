@@ -14,7 +14,7 @@
             stroke-dasharray="0.1 6" />
         </svg>
         <span class="wordmark">Walktober</span>
-        <small class="tagline">tracks and leaves</small>
+        <small class="tagline">tracks & leaves</small>
       </NuxtLink>
     </h1>
 
