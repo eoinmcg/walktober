@@ -13,13 +13,14 @@
       "prompts": [
         "a close-up macro photo of a shiny brown horse chestnut",
         "a horse chestnut nestled inside its spiky green husk on the ground",
-        "a fallen brown conker nut on autumn leaves"
+        "a fallen brown conker nut"
       ],
       "confusers": [
         "a photo of a smooth brown acorn",
         "a photo of a round grey pebble",
         "a photo of a rough pine cone",
-        "a photo of a round mushroom cap"
+        "a photo of a round mushroom cap",
+        "a photo of a leaf"
       ]
     },
     {
