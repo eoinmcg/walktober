@@ -18,3 +18,4 @@ Your photos never leave your device. Cutout and quest checking run locally, and 
 - u2netp for removing background from images
 - Xenova/clip-vit-base-patch32 for matching images with quests
 
+More in depth write up: [dev.to/eoinmcg/walktober-5e30](https://dev.to/eoinmcg/walktober-5e30)
