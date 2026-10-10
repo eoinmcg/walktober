@@ -38,7 +38,7 @@
 
   margin-top: -5px;
   padding-top: 5px;
-  background: white;
+  background-color: color-mix(in srgb, transparent 95%, #3B2C27);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -72,7 +72,7 @@
   grid-row: 1 / span 2;
   width: 3.4rem;
   height: 3.4rem;
-  color: darkgreen;
+  /* color: darkgreen; */
   rotate: -8deg;
   opacity: 0.92;
   transition: all 0.3s cubic-bezier(0.3, 1.5, 0.5, 1);
