@@ -54,15 +54,14 @@ const firstResult = computed(() =>
 watch(firstResult, async (newResults) => {
   let prob = Math.floor(newResults.prob * 100)
   const completed = isQuestCompleted(newResults.id)
-  // if (prob > 50 && !completed) {
+  const capitalizeWords = (string) => {
+    return string.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
   if (prob > 50) {
     completeQuest(newResults.id, ID)
-    let questName = newResults.id
-    // quests.value.forEach((q) => {
-    //   if (q.id === newResults.id) {
-    //     questName = q.title
-    // })
-    burst({ message: `${questName} Quest Complete`, duration: 3 })
+    let questName = newResults.id.replace('-', ' ')
+    burst({ message: `${capitalizeWords(questName)} Quest Complete`, duration: 3 })
   }
 })
 

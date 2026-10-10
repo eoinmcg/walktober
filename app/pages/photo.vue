@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
         <Icon name="fa7-solid:camera" aria-hidden="true" />
         Add photo
       </button>
-      <input type="file" class="hidden" ref="fileInput" accept="image/*" :disabled="busy" @change="onFile" />
+      <input type="file" class="hidden" ref="fileInput" accept="image/*" :disabled="busy || !ready" @change="onFile" />
     </div>
 
 
