@@ -11,6 +11,7 @@
     "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "embeddings": "node scripts/build-text-embeddings.ts",
     "deploy": "nuxt generate && node -e \"fs.copyFileSync('.output/public/index.html', '.output/public/404.html')\" && gh-pages -d .output/public --dotfiles"
   },
   "dependencies": {

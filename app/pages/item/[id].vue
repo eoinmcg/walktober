@@ -57,7 +57,12 @@ watch(firstResult, async (newResults) => {
   // if (prob > 50 && !completed) {
   if (prob > 50) {
     completeQuest(newResults.id, ID)
-    burst({ message: 'Quest Complete', duration: 3 })
+    let questName = newResults.id
+    // quests.value.forEach((q) => {
+    //   if (q.id === newResults.id) {
+    //     questName = q.title
+    // })
+    burst({ message: `${questName} Quest Complete`, duration: 3 })
   }
 })
 

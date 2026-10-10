@@ -77,6 +77,7 @@ onUnmounted(() => {
 
 
     <span v-if="status === 'loading' && cache?.length !== 5" class="note">
+      <p><strong>Just a sec...</strong></p>
       <p>
         Downloading models... {{ progress }}%
         <br />
@@ -88,7 +89,7 @@ onUnmounted(() => {
 
     <span v-else-if="status === 'error'" class="note err">
       <p>
-      Error: {{ error }}
+        Error: {{ error }}
       </p>
     </span>
 
@@ -229,6 +230,4 @@ li {
   background: var(--paper);
 
 }
-
-
 </style>

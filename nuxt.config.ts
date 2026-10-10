@@ -18,6 +18,12 @@ export default defineNuxtConfig({
     },
   },
 
+  nitro: {
+    prerender: {
+      routes: ['/'],
+    },
+  },
+
   pwa: {
     registerType: 'autoUpdate',
     manifest: {

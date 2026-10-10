@@ -65,6 +65,7 @@ watch(isOpen, (newValue) => {
     <AddPhoto />
 
     <Footer />
+    <NuxtPwaAssets />
   </div>
 
 </template>
