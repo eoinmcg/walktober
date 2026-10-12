@@ -6,16 +6,19 @@ const cache = ref([])
 
 const completedQuests = ref(0)
 const totalQuests = ref(0)
+const isDataLoaded = ref(false) // Track if IndexedDB has finished reading
 
-const deleteItem = (async (id) => {
+const images = ref<(ImageRecord & { url: string })[]>([])
+
+const deleteItem = async (id: string) => {
   if (!confirm('Are you sure?')) {
     return
   }
 
-  const image = images.value.find(image => image.id === id)
-  const completedQuests = getCompletedQuests()
-  for (let n in completedQuests) {
-    let quest = completedQuests[n]
+  const image = images.value.find(img => img.id === id)
+  const completed = getCompletedQuests()
+  for (let n in completed) {
+    let quest = completed[n]
     if (quest && quest.imageId === id) {
       removeQuest(n)
     }
@@ -26,24 +29,16 @@ const deleteItem = (async (id) => {
   await deleteImage(id)
   revokeImageUrl(image.url)
 
-  images.value = images.value.filter(
-    image => image.id !== id
-  )
+  images.value = images.value.filter(img => img.id !== id)
   toast('Image removed')
-})
-
-const images = ref<
-  (ImageRecord & { url: string })[]
->([])
+}
 
 onMounted(async () => {
   try {
-    // loads (and hence caches) verification models
     init()
 
     completedQuests.value = getCompletedQuests()
 
-    // Fetch quests safely
     try {
       const data: any = await $fetch('/data/quests.json')
       totalQuests.value = data?.quests?.length || 0
@@ -51,63 +46,83 @@ onMounted(async () => {
       console.error('Failed to load quests:', e)
     }
 
-    // Get transformer cache
-    cache.value = await getTransformersCache()
+    try {
+      cache.value = await getTransformersCache()
+    } catch (e) {
+      cache.value = []
+    }
 
-    // Load records from IndexedDB
-    const records = await getAllImages()
+    let records = []
+    try {
+      records = await getAllImages()
+    } catch (e) {
+      console.error('Failed to load images from IndexedDB:', e)
+    }
 
-    // iOS Safari safety wrapper: wrap persistence check
     try {
       await ensurePersistence()
     } catch (e) {
-      console.warn('Storage persistence not available on this device/browser:', e)
+      console.warn('Persistence check skipped:', e)
     }
 
-    images.value = records.map(image => ({
-      ...image,
-      url: createImageUrl(image.blob),
-    }))
+    // Safely map records, filtering out any malformed data
+    images.value = (records || [])
+      .filter(img => img && img.blob instanceof Blob)
+      .map(img => ({
+        ...img,
+        url: createImageUrl(img.blob),
+      }))
+
   } catch (err) {
-    console.error('Critical error mounting index page:', err)
+    console.error('Error mounting index page:', err)
+  } finally {
+    // Mark data loading as complete so template can safely evaluate
+    isDataLoaded.value = true
   }
 })
 
 onUnmounted(() => {
-  for (const image of images.value) {
-    revokeImageUrl(image.url)
+  if (images.value) {
+    for (const image of images.value) {
+      if (image?.url) revokeImageUrl(image.url)
+    }
   }
 })
-
 </script>
 
 <template>
   <main class="container">
 
+    <!-- Show nothing or a subtle spinner until IndexedDB finishes reading -->
+    <div v-if="!isDataLoaded" class="note">
+      <p class="hint">Loading your scrapbook...</p>
+    </div>
 
-    <span v-if="images.length > 0">
-      <Scrapbook :items="images" :handleDelete="deleteItem" />
-    </span>
+    <!-- Once loaded, safely check lengths using optional chaining -->
+    <template v-else>
+      <span v-if="images && images.length > 0">
+        <Scrapbook :items="images" :handleDelete="deleteItem" />
+      </span>
 
-    <span v-else-if="images.length === 0" class="note">
-      <p>
-        Walktober is a small reason to go outside. Photograph what you notice,
-        complete quests, and fill your scrapbook with the season. Then put your phone away.
-      </p>
-      <p>
-        Take a pic of something notable on your autumnal ramblings. It is then converted into a sticker and added into
-        your scrabook.
-      </p>
-      <p>
-        <NuxtLink to="/photo" type="button">
-          Get Started
-        </NuxtLink>
-      </p>
-    </span>
+      <span v-else class="note">
+        <p>
+          Walktober is a small reason to go outside. Photograph what you notice,
+          complete quests, and fill your scrapbook with the season. Then put your phone away.
+        </p>
+        <p>
+          Take a pic of something notable on your autumnal ramblings. It is then converted into a sticker and added into
+          your scrapbook.
+        </p>
+        <p>
+          <NuxtLink to="/photo" type="button">
+            Get Started
+          </NuxtLink>
+        </p>
+      </span>
+    </template>
 
   </main>
 </template>
-
 <style scoped>
 .note {
   color: #666;
