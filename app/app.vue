@@ -88,11 +88,14 @@ function showBurst() {
 
 <style scoped>
 .global-loader {
-  min-height: 100vh;
-  background: #fbf9f3;
   padding: 2rem;
   text-align: center;
   color: darkgreen;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .global-loader img {
