@@ -38,6 +38,7 @@ const images = ref<
 
 onMounted(async () => {
   // loads (and hence caches) verification models
+  // this is done in app now
   init()
 
   completedQuests.value = getCompletedQuests()
@@ -69,31 +70,8 @@ onUnmounted(() => {
 <template>
   <main class="container">
 
-    <p v-if="status === 'loading' && cache?.length !== 5" class="note hidden">
-      Loading models... {{ progress }}% <span class="hint">(first load downloads weights, then it's cached)</span>
-    </p>
-    <p v-else-if="status === 'error'" class="note err">Error: {{ error }}</p>
-    <p v-else class="note hidden">Model ready <b>{{ device }}</b></p>
 
-
-    <span v-if="status === 'loading' && cache?.length !== 5" class="note">
-      <p><strong>Just a sec...</strong></p>
-      <p>
-        Downloading models... {{ progress }}%
-        <br />
-        <span class="hint">
-          (this only happens the first time you use Walktober)
-        </span>
-      </p>
-    </span>
-
-    <span v-else-if="status === 'error'" class="note err">
-      <p>
-        Error: {{ error }}
-      </p>
-    </span>
-
-    <span v-else-if="images.length > 0">
+    <span v-if="images.length > 0">
       <Scrapbook :items="images" :handleDelete="deleteItem" />
     </span>
 
