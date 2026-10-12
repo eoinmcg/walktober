@@ -37,26 +37,40 @@ const images = ref<
 >([])
 
 onMounted(async () => {
-  // loads (and hence caches) verification models
-  // this is done in app now
-  init()
+  try {
+    // loads (and hence caches) verification models
+    init()
 
-  completedQuests.value = getCompletedQuests()
-  const data = await $fetch('/data/quests.json')
-  totalQuests.value = data.quests.length
+    completedQuests.value = getCompletedQuests()
 
+    // Fetch quests safely
+    try {
+      const data: any = await $fetch('/data/quests.json')
+      totalQuests.value = data?.quests?.length || 0
+    } catch (e) {
+      console.error('Failed to load quests:', e)
+    }
 
-  // we should have 5 items in transformers cache
-  // these handle the classification
-  cache.value = await getTransformersCache()
+    // Get transformer cache
+    cache.value = await getTransformersCache()
 
-  const records = await getAllImages()
-  await ensurePersistence()
+    // Load records from IndexedDB
+    const records = await getAllImages()
 
-  images.value = records.map(image => ({
-    ...image,
-    url: createImageUrl(image.blob),
-  }))
+    // iOS Safari safety wrapper: wrap persistence check
+    try {
+      await ensurePersistence()
+    } catch (e) {
+      console.warn('Storage persistence not available on this device/browser:', e)
+    }
+
+    images.value = records.map(image => ({
+      ...image,
+      url: createImageUrl(image.blob),
+    }))
+  } catch (err) {
+    console.error('Critical error mounting index page:', err)
+  }
 })
 
 onUnmounted(() => {
